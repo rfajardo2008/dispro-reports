@@ -1,0 +1,226 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+* {margin: 0; padding: 0;}
+
+html {
+	height: 100%;
+	background: 
+		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+}
+
+body {
+	font-family: montserrat, arial, verdana;
+}
+
+.general-form {
+	width: 100%;
+	margin: 50px 0 0 0;
+	padding: 0;
+	text-align: center;
+	position: relative;
+}
+
+.general-form fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 10px;
+	box-sizing: border-box;
+	width: 90%;
+	margin: 0 5%;
+	
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+
+.general-form fieldset:not(:first-of-type) {
+	display: none;
+}
+
+.general-form input, .general-form textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+
+.general-form .action-button {
+	width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.general-form .action-button:disabled {
+	background: #367d47;
+	color: #cccccc;
+	pointer-events: none;
+	cursor: default;
+}
+
+.general-form .action-button:hover, .general-form .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+.fs-message {
+	margin-bottom: 20px;
+}
+.fs-error {
+	color: red;
+}
+
+.return {
+	text-decoration: none;
+	display: block;
+	color: #000;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+}
+
+ul.report-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+li.report {
+    display: block;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px;
+}
+
+li.report {
+    padding: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    width: 100%;
+}
+
+li.report a {
+    color: #000;
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    width: 100%;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-position: -10px 0;
+    background-repeat: no-repeat;
+    -webkit-background-size: 10px 100%;
+    -moz-background-size: 10px 100%;
+    -ms-background-size: 10px 100%;
+    -o-background-size: 10px 100%;
+    background-size: 10px 100%;
+}
+
+li.report a * {
+    pointer-events: none;
+}
+
+li.report a.tappable-active {
+    color: #fff;
+    background-color: #e68a00;
+}
+
+.field {
+	width: 100%;
+}
+
+.hidden {
+	display: none;
+}
+
+.disabled {
+	pointer-events: none;
+	cursor: default;
+}
+
+#signature-done {
+	border: 2px solid black;
+	width: 100%;
+	height: 200px;
+}
+
+#signature {
+	color: darkblue;
+	border: 2px dotted black;
+	background-color: lightgrey;
+}

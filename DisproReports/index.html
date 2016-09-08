@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
+<meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile  -->
+<script src="lib/modernizr.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/flashcanvas.js"></script>
+<![endif]-->
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<script id="url-tpl" type="text/x-handlebars-template">
+	<form class="general-form" id="url-form">
+	<fieldset>
+		<h1 class="fs-title">Visor de Reportes</h1>
+		<h2 class="fs-subtitle">URL de Servicio</h2>
+		<h3 class="fs-message">Ingrese la URL que responderá a las peticiones de la aplicación</h3>
+		<input type="text" name="url-field" id="url-field" placeholder="URL de Servicio" autofocus>
+		<input type="submit" value="Aceptar" id="store-url" class="action-button" disabled>
+	</fieldset>
+	</form>
+</script>
+
+<script id="login-tpl" type="text/x-handlebars-template">
+	<form class="general-form" id="login-form">
+		<a href="#" id="change-url" class="return">Configurar URL de Servicio</a>
+		<fieldset>
+			<h1 class="fs-title">Visor de Reportes</h1>
+			<h2 class="fs-subtitle">Acceso</h2>
+			<h3 class="fs-message">Para acceder, ingrese su nombre de usuario y contraseña</h3>
+			<input type="text" name="username" id="username" placeholder="Nombre de Usuario" autofocus>
+			<input type="password" name="password" id="password" placeholder="Contraseña">
+			<input type="submit" value="Ingresar" id="access" class="action-button">
+		</fieldset>
+	</form>
+</script>
+
+<script id="report-list-tpl" type="text/x-handlebars-template">
+	<form class="general-form" id="list-form">
+		<fieldset>
+			<h1 class="fs-title">Visor de Reportes</h1>
+			<h2 class="fs-subtitle">Lista de Reportes</h2>
+			<input type="search" class="search-key" placeholder="Buscar por Título o Fecha" autofocus>
+			<ul class="report-list"></ul>
+		</fieldset>
+	</form>
+</script>
+
+<script id="report-li-tpl" type="text/x-handlebars-template">
+	{{#.}}
+	<li class="report"><a href="#reports/{{this.id}}">{{this.date}}<br/>{{this.title}}</a></li>
+	{{/.}}
+</script>
+
+<script id="report-tpl" type="text/x-hendlebars-template">
+	<form class="general-form" id="msform">
+		<a href="?view=list" class="return">Buscar Reporte</a>
+		<ul id="progressbar">
+			<li class="active">Datos Generales</li>
+			<li>Descripción</li>
+			<li>Firma</li>
+		</ul>
+		<fieldset>
+			<h1 class="fs-title">Visor de Reportes</h1>
+			<h2 class="fs-subtitle">Datos Generales</h2>
+			<ul class="report-list">
+				<li class="report">
+					<div id="edit-title" class="field">
+						<a href="#edit/title">{{id}} {{fmtDate}}<br/>
+						<div id="lbl-title">{{title}}</div>
+						</a>
+					</div>
+					<div id="title" class="hidden field">
+						<input type="text" name="txt-title" id="txt-title" 
+							placeholder="Título del Reporte" value="{{title}}">
+						</div>
+				</li>
+				<li class="report">
+					<div id="edit-location" class="field">
+						<a href="#edit/location">Ubicación:<br/>
+						<div id="lbl-location">{{location}}</div>
+						</a>
+					</div>
+					<div id="location" class="hidden field">
+						<input type="text" name="txt-location" id="txt-location" 
+							placeholder="Ubicación del Servicio" value="{{location}}">
+					</div>
+				</li>
+				<li class="report">
+					<div id="edit-contact" class="field">
+						<a href="#edit/contact" >Contacto:<br/>
+						<div id="lbl-contact">{{contact}}</div>
+						</a>
+					</div>
+					<div id="contact" class="hidden field">
+						<input type="text" name="txt-contact" id="txt-contact" 
+							placeholder="Nombre del Contacto" value="{{contact}}">
+					</div>
+				</li>
+			</ul>
+			<input type="button" name="next" class="next action-button" value="Siguiente" />
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title">Visor de Reportes</h1>
+			<h2 class="fs-subtitle">Descripción</h2>
+			<div id="switch-enable"><a href="#enable" class="enabler">Editar</a></div>
+			<div id="switch-disable" hidden><a href="#disable" class="enabler">Aceptar</a></div>
+			<textarea name="description" rows="15" id="description" disabled data-role="none">{{description}}</textarea>
+			<input type="button" name="previous" class="previous action-button" value="Anterior" />
+			<input type="button" name="next" class="next action-button" value="Siguiente" />
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title">Visor de Reportes</h1>
+			<h2 class="fs-subtitle">Firma</h2>
+			<input type="button" value="Firmar" id="sign" class="hidden action-button">
+			<input type="button" value="Anterior" id="cancel-sign" class="hidden previous action-button">
+			<div id="content" class="hidden">
+				<div id="signature"></div>
+			</div>
+			<input type="button" value="Cancelar" id="cancel-signature" class="hidden action-button">
+			<input type="button" value="Borrar" id="reset-canvas" class="hidden action-button">
+			<input type="button" value="Capturar" id="capture" class="hidden action-button">
+			<div id="signature-done" class="hidden"></div>
+			<input type="button" value="Anterior" id="sign-previous" class="hidden previous action-button">
+		</fieldset>
+	</form>
+</script>
+
+<script src="lib/jquery-2.1.3.min.js"></script>
+<script src="lib/jquery-1.3.easing.min.js"></script>
+<script src="lib/handlebars.js"></script>
+<script src="js/jSignature.js"></script>
+<script src="js/jSignature.CompressorSVG.js"></script>
+<script src="js/UrlView.js"></script>
+<script src="js/LoginView.js"></script>
+<script src="js/ReportListView.js"></script>
+<script src="js/ReportView.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

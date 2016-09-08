@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns       = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.ubsoft.disproreports"
+        versionCode = "10"
+        version     = "1.1.0">
+ 
+    <name>Dispro Reports</name>
+ 
+    <description>
+        Retrieves report information to consult, update and sign for completion
+    </description>
+ 
+    <author href="http://www.ubsoft.com.mx" email="rfajardo@ubsoft.com.mx">
+        Rodolfo Fajardo
+    </author>
+ 
+    <feature name="http://api.phonegap.com/1.0/media"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+ 
+</widget>
